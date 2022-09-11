@@ -1,26 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Header></Header>
+  <router-view></router-view>
+  <Footer v-show="Route.meta.footerShow"></Footer>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup name="app">
+import { useNavColloumStore } from "@/store/navColloumStore";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { useRoute } from "vue-router";
+import { onMounted } from "vue";
+import { useSearchStore } from "@/store/searchStore";
+const searchStore = useSearchStore();
+const navColloumStore = useNavColloumStore();
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+onMounted(() => {
+  navColloumStore.requstNavColloumItems();
+});
+
+const Route = useRoute();
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
