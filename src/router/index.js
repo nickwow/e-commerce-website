@@ -1,17 +1,4 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "@/pages/Home";
-import Login from "@/pages/Login";
-import Register from "@/pages/Register";
-import Search from "@/pages/Search";
-import Detail from "@/pages/Detail";
-import addShopCartSuccess from "@/pages/addShopCartSuccess";
-import paySuccess from "@/pages/paySuccess";
-import shopCart from "@/pages/shopCart";
-import Trade from "@/pages/Trade";
-import Pay from "@/pages/Pay";
-import userCenter from "@/pages/userCenter";
-import myOrder from "@/pages/userCenter/myOrder";
-import teamOrder from "@/pages/userCenter/teamOrder";
 import { useUserInfStore } from "@/store/userInfStore";
 const router = createRouter({
   history: createWebHashHistory(),
@@ -19,7 +6,7 @@ const router = createRouter({
     {
       path: "/userCenter",
       name: "userCenter",
-      component: userCenter,
+      component: () => import("@/pages/userCenter"),
       meta: {
         footerShow: false,
       },
@@ -27,12 +14,12 @@ const router = createRouter({
         {
           path: "myOrder",
           name: "myOrder",
-          component: myOrder,
+          component: () => import("@/pages/userCenter/myOrder"),
         },
         {
           path: "teamOrder",
           name: "teamOrder",
-          component: teamOrder,
+          component: () => import("@/pages/userCenter/teamOrder"),
         },
         {
           path: "/userCenter",
@@ -43,7 +30,7 @@ const router = createRouter({
     {
       path: "/paySuccess",
       name: "paySuccess",
-      component: paySuccess,
+      component: () => import("@/pages/paySuccess"),
       meta: { footerShow: false },
       beforeEnter(to, from, next) {
         if (from.path.indexOf("Pay") != -1) {
@@ -56,7 +43,7 @@ const router = createRouter({
     {
       path: "/Pay",
       name: "Pay",
-      component: Pay,
+      component: () => import("@/pages/Pay"),
       meta: { footerShow: false },
       beforeEnter(to, from, next) {
         if (from.path.indexOf("Trade") != -1) {
@@ -69,7 +56,7 @@ const router = createRouter({
     {
       path: "/Trade",
       name: "Trade",
-      component: Trade,
+      component: () => import("@/pages/Trade"),
       meta: { footerShow: false },
       beforeEnter(to, from, next) {
         if (from.path.indexOf("shopCart") != -1) {
@@ -82,43 +69,43 @@ const router = createRouter({
     {
       path: "/shopCart",
       name: "shopCart",
-      component: shopCart,
+      component: () => import("@/pages/shopCart"),
       meta: { footerShow: true },
     },
     {
       path: "/addShopCartSuccess",
       name: "addShopCartSuccess",
-      component: addShopCartSuccess,
+      component: () => import("@/pages/addShopCartSuccess"),
       meta: { footerShow: true },
     },
     {
       path: "/Detail/:skuId?",
       name: "Detail",
-      component: Detail,
+      component: () => import("@/pages/Detail"),
       meta: { footerShow: true },
     },
     {
       path: "/Home",
       name: "Home",
-      component: Home,
+      component: () => import("@/pages/Home"),
       meta: { footerShow: true },
     },
     {
       path: "/Login",
       name: "Login",
-      component: Login,
+      component: () => import("@/pages/Login"),
       meta: { footerShow: false },
     },
     {
       path: "/Register",
       name: "Register",
-      component: Register,
+      component: () => import("@/pages/Register"),
       meta: { footerShow: false },
     },
     {
       path: "/Search/:keyword?",
       name: "Search",
-      component: Search,
+      component: () => import("@/pages/Search"),
       meta: { footerShow: true },
     },
     {
